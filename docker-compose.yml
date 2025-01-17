@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  web:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    environment:
+      - FLASK_APP=app.py
+      - FLASK_ENV=development
+      - SQLALCHEMY_DATABASE_URI=postgresql://postgres:Passwd@123@db/activity_logs
+    depends_on:
+      - db
+    networks:
+      - app-network
+    volumes:
+      - .:/app
+
+  db:
+    image: postgres:13
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=Passwd@123
+      - POSTGRES_DB=activity_logs
+    ports:
+      - "5432:5432"
+    networks:
+      - app-network
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
