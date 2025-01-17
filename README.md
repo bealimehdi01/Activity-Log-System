@@ -2,7 +2,7 @@
 
 A full-stack application for processing and analyzing real-time user activity logs.
 
-## Assignment Requirements Checklist
+## Requirements Checklist
 
 ✅ Flask Application Setup
 - [x] PostgreSQL database integration
